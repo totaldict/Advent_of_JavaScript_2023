@@ -12,21 +12,26 @@ generator client {
 // to create migrations for them and apply to your dev DB.
 
 model User {
-  id             Int        @id @default(autoincrement())
-  email          String     @unique
-  firstName      String?
-  lastName       String?
-  avatar         String?
-  createdAt      DateTime   @default(now())
-  updatedAt      DateTime   @updatedAt
-  role           Role       @default(USER)
-  status         Invite[]
-  event          Event[]
-  santa          Pairings[] @relation(name: "Pairings_Santa")
-  person         Pairings[] @relation(name: "Pairings_Person")
-  wishList       WishList[]
-  thankYouAuthor ThankYou[] @relation(name: "ThankYou_User")
-  thankYouToUser ThankYou[] @relation(name: "ThankYou_ToUser")
+  id                  Int        @id @default(autoincrement())
+  email               String     @unique
+  firstName           String?
+  lastName            String?
+  avatar              String?
+  createdAt           DateTime   @default(now())
+  updatedAt           DateTime   @updatedAt
+  role                Role       @default(USER)
+  status              Invite[]
+  event               Event[]
+  santa               Pairings[] @relation(name: "Pairings_Santa")
+  person              Pairings[] @relation(name: "Pairings_Person")
+  wishList            WishList[]
+  thankYouAuthor      ThankYou[] @relation(name: "ThankYou_User")
+  thankYouToUser      ThankYou[] @relation(name: "ThankYou_ToUser")
+  // auth
+  hashedPassword      String     @default("")
+  salt                String     @default("")
+  resetToken          String?
+  resetTokenExpiresAt DateTime?
 }
 
 enum Role {
